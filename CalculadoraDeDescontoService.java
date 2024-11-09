@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class CalculadoraDeDescontoService {
     private ArrayList<IFormaDescontoTaxaEntrega> metodosDeDesconto = new ArrayList<>();
 
-    public CalculadoraDeDescontoService() {
-        metodosDeDesconto.add(new FormaDescontoTaxaPorBairro());
-        metodosDeDesconto.add(new FormaDescontoTaxaPorTipoCliente());
+    public CalculadoraDeDescontoService(Pedido pedido) {
+        metodosDeDesconto.add(new FormaDescontoTaxaPorBairro(pedido));
+        metodosDeDesconto.add(new FormaDescontoTaxaPorTipoCliente(pedido));
         metodosDeDesconto.add(new FormaDescontoTipoItem());
         metodosDeDesconto.add(new FormaDescontoValorPedido());
     }

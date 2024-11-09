@@ -1,6 +1,9 @@
 public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
+    private String bairroCliente;
 
-    
+    public FormaDescontoTaxaPorBairro(Pedido pedido) {
+        this.bairroCliente = pedido.getCliente().getBairro();
+    }
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
@@ -15,7 +18,7 @@ public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
     }
 
     public boolean seAplica(Pedido pedido) {
-        if ( this.getBairro(pedido).equals("Centro") || this.getBairro(pedido).equals("Bela Vista") || this.getBairro(pedido).equals("Cidade Maravilhosa") ) {
+        if ( bairroCliente.equals("Centro") || bairroCliente.equals("Bela Vista") || bairroCliente.equals("Cidade Maravilhosa") ) {
             return true;
         }
         return false;

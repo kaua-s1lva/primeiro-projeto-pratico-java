@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Pedido {
     private double taxaEntrega = 10;
     private Cliente cliente;
-    private ArrayList<Item> itens;
-    private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega;
+    private ArrayList<Item> itens = new ArrayList<>();
+    private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
 
-    public Pedido (Cliente cliente) {
+    public Pedido (Date data, Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -35,7 +36,7 @@ public class Pedido {
     }
 
     public void aplicarDesconto(CalculadoraDeDescontoService desconto) {
-        desconto = new CalculadoraDeDescontoService();
+        desconto = new CalculadoraDeDescontoService(this);
         cuponsDescontoEntrega = desconto.calcularDesconto(this);
     }
 
