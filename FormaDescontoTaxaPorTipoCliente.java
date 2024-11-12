@@ -1,7 +1,8 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntrega {
-    private Map<String,Double> descontosPorTipoCliente;
+    private Map<String,Double> descontosPorTipoCliente = new HashMap<>();
     private String tipoCliente;
 
     public FormaDescontoTaxaPorTipoCliente(Pedido pedido) {
@@ -13,6 +14,10 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
+            System.out.println("Valor desconto total: " + (descontosPorTipoCliente.get(tipoCliente) + pedido.getDescontoConcedido()));
+            if (pedido.getDescontoConcedido() + descontosPorTipoCliente.get(tipoCliente) > 10) {
+                return new CupomDescontoEntrega(tipoCliente, 0);
+            }
             return new CupomDescontoEntrega(tipoCliente, descontosPorTipoCliente.get(tipoCliente));
         }
         return null;

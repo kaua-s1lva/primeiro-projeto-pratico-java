@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
-    Map<String,Double> descontosPorTipoItem;
+    Map<String,Double> descontosPorTipoItem = new HashMap<>();
 
     public FormaDescontoTipoItem() {
         descontosPorTipoItem.put("Alimentação", 5.0);
@@ -12,10 +13,17 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
         double valorDesconto = 0;
-        if (seAplica(pedido) && pedido.getDescontoConcedido() > 10) {
-            for (Map.Entry<String,Double> entry : descontosPorTipoItem.entrySet()) {
-                valorDesconto += entry.getValue();
+        if (seAplica(pedido)) {
+            for (int i=0; i<pedido.getItens().size(); i++) {
+                if ( descontosPorTipoItem.get(pedido.getItens().get(i).getTipo()) > 0 ) {
+                    valorDesconto += descontosPorTipoItem.get(pedido.getItens().get(i).getTipo());
+                    System.out.println("Valor do desconto ate agora: " + pedido.getDescontoConcedido());
+                    if (pedido.getDescontoConcedido() + valorDesconto > 10) {
+                        valorDesconto = 10 - pedido.getDescontoConcedido();
+                    }
+                }
             }
+            System.out.println("Valor do desconto por tipo item: " + valorDesconto);
             return new CupomDescontoEntrega("Item", valorDesconto);
         } else {
             return null;
@@ -25,7 +33,7 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
     public boolean seAplica(Pedido pedido) {
         ArrayList<Item> itens = pedido.getItens();
         for (int i=0; i<itens.size(); i++) {
-            if (descontosPorTipoItem.get(itens.get(i).getTipo()) > 0) {
+            if (descontosPorTipoItem.get(itens.get(i).getTipo()) != null) {
                 return true;
             }
         }
