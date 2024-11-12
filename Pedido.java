@@ -42,14 +42,19 @@ public class Pedido {
 
     public double getDescontoConcedido() {
         double descontoTotal = 0;
-        for (int i=0; i<cuponsDescontoEntrega.size(); i++) {
-            descontoTotal += cuponsDescontoEntrega.get(i).getValorDesconto();
+        for (CupomDescontoEntrega cupom : cuponsDescontoEntrega) {
+            System.out.println("nome: " + cupom.getNomeMetodo());
+            descontoTotal += cupom.getValorDesconto();
         }
         return descontoTotal;
     }
 
     public ArrayList<CupomDescontoEntrega> getCuponsDescontoEntrega() {
         return cuponsDescontoEntrega;
+    }
+
+    public void setCuponsDescontoEntrega(CupomDescontoEntrega cupom) {
+        this.cuponsDescontoEntrega.add(cupom);
     }
 
     public String toString() {
