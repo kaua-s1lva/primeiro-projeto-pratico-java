@@ -12,18 +12,19 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
     }
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+        System.out.println("Valor do desconto ate agora: " + pedido.getDescontoConcedido());
+
         double valorDesconto = 0;
         if (seAplica(pedido)) {
             for (int i=0; i<pedido.getItens().size(); i++) {
                 if ( descontosPorTipoItem.get(pedido.getItens().get(i).getTipo()) > 0 ) {
                     valorDesconto += descontosPorTipoItem.get(pedido.getItens().get(i).getTipo());
-                    System.out.println("Valor do desconto ate agora: " + pedido.getDescontoConcedido());
                     if (pedido.getDescontoConcedido() + valorDesconto > 10) {
                         valorDesconto = 10 - pedido.getDescontoConcedido();
                     }
                 }
             }
-            System.out.println("Valor do desconto por tipo item: " + valorDesconto);
+            //System.out.println("Valor do desconto por tipo item: " + valorDesconto);
             return new CupomDescontoEntrega("Item", valorDesconto);
         } else {
             return null;

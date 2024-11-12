@@ -14,7 +14,7 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
-            System.out.println("Valor desconto total: " + (descontosPorTipoCliente.get(tipoCliente) + pedido.getDescontoConcedido()));
+            //System.out.println("Valor desconto total: " + (descontosPorTipoCliente.get(tipoCliente) + pedido.getDescontoConcedido()));
             if (pedido.getDescontoConcedido() + descontosPorTipoCliente.get(tipoCliente) > 10) {
                 return new CupomDescontoEntrega(tipoCliente, 0);
             }

@@ -10,8 +10,7 @@ public class CalculadoraDeDescontoService {
         metodosDeDesconto.add(new FormaDescontoValorPedido());
     }
 
-    public void calcularDesconto(Pedido pedido) {
-        /*
+    public ArrayList<CupomDescontoEntrega> calcularDesconto(Pedido pedido) {
         ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
         for (int i=0; i<metodosDeDesconto.size(); i++) {
             if (metodosDeDesconto.get(i).seAplica(pedido)) {
@@ -19,9 +18,5 @@ public class CalculadoraDeDescontoService {
             }
         }
         return cuponsDescontoEntrega;
-         */
-        for (IFormaDescontoTaxaEntrega formaDesconto : metodosDeDesconto) {
-            formaDesconto.calcularDesconto(pedido);
-        }
     }
 }

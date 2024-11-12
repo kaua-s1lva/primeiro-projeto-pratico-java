@@ -11,9 +11,8 @@ public class Main {
         pedido.adicionarItem(item);
         pedido.adicionarItem(item2);
 
-        pedido.aplicarDesconto(new CalculadoraDeDescontoService(pedido));
-        
-        //System.out.println(pedido.getDescontoConcedido());
+        pedido.aplicarDesconto();
+
         System.out.println(pedido.toString());
     }
 }

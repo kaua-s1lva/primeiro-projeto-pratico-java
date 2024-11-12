@@ -35,9 +35,9 @@ public class Pedido {
         return taxaEntrega;
     }
 
-    public void aplicarDesconto(CalculadoraDeDescontoService desconto) {
-        desconto = new CalculadoraDeDescontoService(this);
-        desconto.calcularDesconto(this);
+    public void aplicarDesconto() {
+        CalculadoraDeDescontoService desconto = new CalculadoraDeDescontoService(this);
+        cuponsDescontoEntrega = desconto.calcularDesconto(this);
     }
 
     public double getDescontoConcedido() {
