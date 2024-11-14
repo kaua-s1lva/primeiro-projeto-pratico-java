@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main (String[] args) {
@@ -11,8 +13,18 @@ public class Main {
         pedido.adicionarItem(item);
         pedido.adicionarItem(item2);
 
-        pedido.aplicarDesconto();
+        CalculadoraDeDescontoService calculadora = new CalculadoraDeDescontoService(pedido);
+
+        calculadora.calcularDesconto(pedido);
 
         System.out.println(pedido.toString());
+    }
+
+    public static Map<String, Double> getTiposCliente() {
+        Map<String, Double> tipoCliente = new HashMap<>(); 
+        tipoCliente.put("Ouro", 3.00);
+        tipoCliente.put("Prata", 2.00);
+        tipoCliente.put("Bronze", 1.00);
+        return tipoCliente;
     }
 }

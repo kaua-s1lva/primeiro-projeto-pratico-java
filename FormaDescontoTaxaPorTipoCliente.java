@@ -7,9 +7,12 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
 
     public FormaDescontoTaxaPorTipoCliente(Pedido pedido) {
         tipoCliente = pedido.getCliente().getTipo();
+        /*
         descontosPorTipoCliente.put("Ouro", 3.00);
         descontosPorTipoCliente.put("Prata", 2.00);
         descontosPorTipoCliente.put("Bronze", 1.00);
+         */
+        Main.getTiposCliente();
     }
 
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
