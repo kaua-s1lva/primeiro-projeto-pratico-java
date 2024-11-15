@@ -2,33 +2,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntrega {
-    private Map<String,Double> descontosPorTipoCliente = new HashMap<>();
-    private String tipoCliente;
+    private Map<String,Double> clientes = new HashMap<>();
 
-    public FormaDescontoTaxaPorTipoCliente(Pedido pedido) {
-        tipoCliente = pedido.getCliente().getTipo();
-        /*
-        descontosPorTipoCliente.put("Ouro", 3.00);
-        descontosPorTipoCliente.put("Prata", 2.00);
-        descontosPorTipoCliente.put("Bronze", 1.00);
-         */
-        Main.getTiposCliente();
+    public FormaDescontoTaxaPorTipoCliente() {
+        clientes.put("Ouro", 0.3);
+        clientes.put("Prata", 0.2);
+        clientes.put("Bronze", 0.1);
     }
 
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
-            //System.out.println("Valor desconto total: " + (descontosPorTipoCliente.get(tipoCliente) + pedido.getDescontoConcedido()));
-            if (pedido.getDescontoConcedido() + descontosPorTipoCliente.get(tipoCliente) > 10) {
-                return new CupomDescontoEntrega(tipoCliente, 0);
-            }
-            return new CupomDescontoEntrega(tipoCliente, descontosPorTipoCliente.get(tipoCliente));
+            double valorDesconto = clientes.get(pedido.getCliente().getTipo()) * pedido.getTaxaEntrega();
+            System.out.println("Valor do desconto por cliente: " + valorDesconto);
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Cliente", valorDesconto));
         }
-        return null;
     }
 
     public boolean seAplica(Pedido pedido) {
-        if (descontosPorTipoCliente.get(tipoCliente) > 0) return true;
-        return false;
+        return clientes.containsKey(pedido.getCliente().getTipo());
     }
 
 }

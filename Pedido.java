@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
-    private double taxaEntrega = 10;
+    private double taxaEntrega;
     private Cliente cliente;
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
 
-    public Pedido (Date data, Cliente cliente) {
+    public Pedido (Date data, Cliente cliente, double taxaEntrega) {
         this.cliente = cliente;
+        this.taxaEntrega = taxaEntrega;
     }
 
     public void adicionarItem (Item item) {
@@ -35,9 +36,8 @@ public class Pedido {
         return taxaEntrega;
     }
 
-    public void aplicarDesconto() {
-        CalculadoraDeDescontoService desconto = new CalculadoraDeDescontoService(this);
-        cuponsDescontoEntrega = desconto.calcularDesconto(this);
+    public void aplicarDesconto(CupomDescontoEntrega cupom) {
+        cuponsDescontoEntrega.add(cupom);
     }
 
     public double getDescontoConcedido() {
@@ -46,6 +46,7 @@ public class Pedido {
             System.out.println("nome: " + cupom.getNomeMetodo());
             descontoTotal += cupom.getValorDesconto();
         }
+        if (descontoTotal > this.getTaxaEntrega()) return this.getTaxaEntrega();
         return descontoTotal;
     }
 

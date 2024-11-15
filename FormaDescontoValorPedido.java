@@ -1,22 +1,13 @@
 public class FormaDescontoValorPedido implements IFormaDescontoTaxaEntrega {
-    private double limiteValorPedido;
-    private static double valorDesconto = 5.0;
+    private static double valorDesconto = 0.15;
 
-    public FormaDescontoValorPedido () {
-
-    }
-
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
-            return new CupomDescontoEntrega("valor pedido", valorDesconto);
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por valor", valorDesconto * pedido.getTaxaEntrega()));
         }
-        return null;
     }
 
     public boolean seAplica(Pedido pedido) {
-        if (pedido.getValorPedido() > 200) {
-            return true;
-        }
-        return false;
+        return pedido.getValorPedido() > 2000;
     }
 }

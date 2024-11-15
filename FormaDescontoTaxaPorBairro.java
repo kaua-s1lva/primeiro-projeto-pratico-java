@@ -1,30 +1,23 @@
-public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
-    private String bairroCliente;
+import java.util.HashMap;
+import java.util.Map;
 
-    public FormaDescontoTaxaPorBairro(Pedido pedido) {
-        this.bairroCliente = pedido.getCliente().getBairro();
+public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
+    Map<String, Double> bairros = new HashMap<>();
+
+    public FormaDescontoTaxaPorBairro() {
+        bairros.put("Centro", 0.2);
+        bairros.put("Bela Vista", 0.3);
+        bairros.put("Cidade Maravilhosa", 0.15);
     }
 
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
-            if (this.getBairro(pedido) == "Centro") {
-                return new CupomDescontoEntrega("bairro", 2);
-            } else if (this.getBairro(pedido) == "Bela Vista") {
-                return new CupomDescontoEntrega("bairro", 3);
-            } else {
-                return new CupomDescontoEntrega("bairro", 1.5);
-            }
-        } else return null;
+            pedido.aplicarDesconto(new CupomDescontoEntrega
+                ("Desconto por bairro", bairros.get(pedido.getCliente().getBairro()) * pedido.getTaxaEntrega()));
+        }
     }
 
     public boolean seAplica(Pedido pedido) {
-        if ( bairroCliente.equals("Centro") || bairroCliente.equals("Bela Vista") || bairroCliente.equals("Cidade Maravilhosa") ) {
-            return true;
-        }
-        return false;
-    }
-
-    private String getBairro(Pedido pedido) {
-        return pedido.getCliente().getBairro();
+        return bairros.containsKey(pedido.getCliente().getBairro());
     }
 }

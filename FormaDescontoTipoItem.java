@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,40 +5,30 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
     Map<String,Double> descontosPorTipoItem = new HashMap<>();
 
     public FormaDescontoTipoItem() {
-        descontosPorTipoItem.put("Alimentação", 5.0);
-        descontosPorTipoItem.put("Educação", 2.0);
-        descontosPorTipoItem.put("Lazer", 1.5);
+        descontosPorTipoItem.put("Alimentação", 0.05);
+        descontosPorTipoItem.put("Educação", 0.2);
+        descontosPorTipoItem.put("Lazer", 0.15);
     }
 
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
-        System.out.println("Valor do desconto ate agora: " + pedido.getDescontoConcedido());
-
+    public void calcularDesconto(Pedido pedido) {
         double valorDesconto = 0;
         if (seAplica(pedido)) {
-            for (int i=0; i<pedido.getItens().size(); i++) {
-                if ( descontosPorTipoItem.get(pedido.getItens().get(i).getTipo()) > 0 ) {
-                    valorDesconto += descontosPorTipoItem.get(pedido.getItens().get(i).getTipo());
-                    if (pedido.getDescontoConcedido() + valorDesconto > 10) {
-                        valorDesconto = 10 - pedido.getDescontoConcedido();
-                        System.out.println("Valor do desconto: " + valorDesconto);
-                    }
+            for (Item item : pedido.getItens()) {
+                if (descontosPorTipoItem.containsKey(item.getTipo())) {
+                    valorDesconto += pedido.getTaxaEntrega() * descontosPorTipoItem.get(item.getTipo());
                 }
             }
-            //System.out.println("Valor do desconto por tipo item: " + valorDesconto);
-            return new CupomDescontoEntrega("Item", valorDesconto);
-        } else {
-            return null;
+            System.out.println("Valor do desconto por item: " + valorDesconto);
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Item", valorDesconto));
         }
     }
 
     public boolean seAplica(Pedido pedido) {
-        ArrayList<Item> itens = pedido.getItens();
-        for (int i=0; i<itens.size(); i++) {
-            if (descontosPorTipoItem.get(itens.get(i).getTipo()) != null) {
+        for (Item item : pedido.getItens()) {
+            if (descontosPorTipoItem.containsKey(item.getTipo())) {
                 return true;
             }
         }
-
         return false;
     }
 }
