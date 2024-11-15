@@ -43,7 +43,7 @@ public class Pedido {
     public double getDescontoConcedido() {
         double descontoTotal = 0;
         for (CupomDescontoEntrega cupom : cuponsDescontoEntrega) {
-            System.out.println("nome: " + cupom.getNomeMetodo());
+            System.out.println("nome: " + cupom.getNomeMetodo() + " - " + cupom.getValorDesconto());
             descontoTotal += cupom.getValorDesconto();
         }
         if (descontoTotal > this.getTaxaEntrega()) return this.getTaxaEntrega();

@@ -13,7 +13,6 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
     public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
             double valorDesconto = clientes.get(pedido.getCliente().getTipo()) * pedido.getTaxaEntrega();
-            System.out.println("Valor do desconto por cliente: " + valorDesconto);
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Cliente", valorDesconto));
         }
     }

@@ -18,7 +18,6 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
                     valorDesconto += pedido.getTaxaEntrega() * descontosPorTipoItem.get(item.getTipo());
                 }
             }
-            System.out.println("Valor do desconto por item: " + valorDesconto);
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Item", valorDesconto));
         }
     }
