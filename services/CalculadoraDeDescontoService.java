@@ -1,3 +1,12 @@
+package services;
+
+import formasDesconto.FormaDescontoTaxaPorBairro;
+import formasDesconto.FormaDescontoTaxaPorTipoCliente;
+import formasDesconto.FormaDescontoTipoItem;
+import formasDesconto.FormaDescontoValorPedido;
+import interfaces.IFormaDescontoTaxaEntrega;
+import models.Pedido;
+
 import java.util.ArrayList;
 
 public class CalculadoraDeDescontoService {

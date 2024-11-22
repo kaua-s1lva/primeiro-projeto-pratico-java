@@ -1,3 +1,5 @@
+package models;
+
 public class CupomDescontoEntrega {
     private String nomeMetodo;
     private double valorDesconto;

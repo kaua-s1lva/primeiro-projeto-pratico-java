@@ -1,3 +1,8 @@
+package formasDesconto;
+import interfaces.IFormaDescontoTaxaEntrega;
+import models.CupomDescontoEntrega;
+import models.Pedido;
+
 public class FormaDescontoValorPedido implements IFormaDescontoTaxaEntrega {
     private static double valorDesconto = 0.15;
 

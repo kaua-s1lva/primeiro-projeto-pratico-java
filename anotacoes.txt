@@ -1,0 +1,7 @@
+dúvidas:
+
+- Qual implementação utilizar para fazer o rastreio do pedido, a do livro ou a do slide? A vantagem da do slide é que deixa mais independente
+a classe Pedido, mas torna mais passível a erros, pois posso ir de um status para o outro a vontade, sem nenhuma interferência. Pensei 
+em utilizar a mesma forma de implementação dos descontos, criar uma interface, nela possui um service e com as implementações. Assim, 
+não há uma dependência da classe Pedido e a funcionalidade de rastrear pedido. Mas será que é essencial retirar essa relação? por que 
+houve a necessidade de retirar essa relação para os descontos?

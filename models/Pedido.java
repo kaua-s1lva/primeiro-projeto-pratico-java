@@ -1,3 +1,5 @@
+package models;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -6,10 +8,12 @@ public class Pedido {
     private Cliente cliente;
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
+    private String status;
 
     public Pedido (Date data, Cliente cliente, double taxaEntrega) {
         this.cliente = cliente;
         this.taxaEntrega = taxaEntrega;
+        this.status = "Pendente";
     }
 
     public void adicionarItem (Item item) {
@@ -58,7 +62,11 @@ public class Pedido {
         this.cuponsDescontoEntrega.add(cupom);
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String toString() {
-        return "\nTaxa de entrega: " + taxaEntrega + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
+        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + status + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
     }
 }

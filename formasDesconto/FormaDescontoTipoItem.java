@@ -1,5 +1,13 @@
+package formasDesconto;
+
+import interfaces.IFormaDescontoTaxaEntrega;
+import models.CupomDescontoEntrega;
+import models.Item;
+import models.Pedido;
+
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
     Map<String,Double> descontosPorTipoItem = new HashMap<>();

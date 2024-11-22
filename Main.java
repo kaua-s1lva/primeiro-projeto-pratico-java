@@ -1,5 +1,10 @@
 import java.util.Date;
 
+import models.Cliente;
+import models.Item;
+import models.Pedido;
+import services.CalculadoraDeDescontoService;
+
 public class Main {
     public static void main (String[] args) {
         Cliente cliente = new Cliente("Kaua", "Ouro", 3, "rua vitorio albani", "Cidade Maravilhosa", "alegre");
@@ -22,6 +27,11 @@ public class Main {
         CalculadoraDeDescontoService calculadora = new CalculadoraDeDescontoService(pedido);
 
         calculadora.calcularDesconto(pedido);
+
+        RastrearPedido rastro = new RastrearPedido(pedido);
+
+        rastro.atualizarParaEmPreparo();
+        rastro.atualizarParaEmTransito();
 
         System.out.println(pedido.toString());
     }

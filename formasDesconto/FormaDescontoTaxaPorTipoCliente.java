@@ -1,3 +1,9 @@
+package formasDesconto;
+
+import interfaces.IFormaDescontoTaxaEntrega;
+import models.CupomDescontoEntrega;
+import models.Pedido;
+
 import java.util.HashMap;
 import java.util.Map;
 
