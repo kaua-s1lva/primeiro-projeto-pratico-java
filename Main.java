@@ -4,6 +4,7 @@ import models.Cliente;
 import models.Item;
 import models.Pedido;
 import services.CalculadoraDeDescontoService;
+import services.ControleDeEstadosPedidoService;
 
 public class Main {
     public static void main (String[] args) {
@@ -24,14 +25,18 @@ public class Main {
         pedido.adicionarItem(item5);
         pedido.adicionarItem(item6);
 
-        CalculadoraDeDescontoService calculadora = new CalculadoraDeDescontoService(pedido);
+        CalculadoraDeDescontoService calculadora = new CalculadoraDeDescontoService();
 
         calculadora.calcularDesconto(pedido);
 
-        RastrearPedido rastro = new RastrearPedido(pedido);
+        //RastrearPedido rastro = new RastrearPedido(pedido);
 
-        rastro.atualizarParaEmPreparo();
-        rastro.atualizarParaEmTransito();
+        //rastro.atualizarParaEmPreparo();
+        //rastro.atualizarParaEmTransito();
+        ControleDeEstadosPedidoService controle = new ControleDeEstadosPedidoService();
+
+        controle.cvcv();
+
 
         System.out.println(pedido.toString());
     }

@@ -8,12 +8,12 @@ public class Pedido {
     private Cliente cliente;
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
-    private String status;
+    private String estado;
 
     public Pedido (Date data, Cliente cliente, double taxaEntrega) {
         this.cliente = cliente;
         this.taxaEntrega = taxaEntrega;
-        this.status = "Pendente";
+        this.estado = "Pendente";
     }
 
     public void adicionarItem (Item item) {
@@ -62,11 +62,11 @@ public class Pedido {
         this.cuponsDescontoEntrega.add(cupom);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String toString() {
-        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + status + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
+        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + estado + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
     }
 }

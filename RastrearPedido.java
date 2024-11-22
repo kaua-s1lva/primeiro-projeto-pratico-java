@@ -8,14 +8,14 @@ public class RastrearPedido {
     }
 
     public void atualizarParaEmPreparo() {
-        pedido.setStatus("Em preparo");
+        pedido.setEstado("Em preparo");
     }
 
     public void atualizarParaEmTransito() {
-        pedido.setStatus("Em trânsito");
+        pedido.setEstado("Em trânsito");
     }
 
     public void atualizarParaEntregue() {
-        pedido.setStatus("Entregue");
+        pedido.setEstado("Entregue");
     }
 }
