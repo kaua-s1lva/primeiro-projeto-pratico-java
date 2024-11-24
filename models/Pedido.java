@@ -3,17 +3,18 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import abstractions.EstadoPedido;
+
 public class Pedido {
     private double taxaEntrega;
     private Cliente cliente;
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
-    private String estado;
+    private EstadoPedido estado;
 
     public Pedido (Date data, Cliente cliente, double taxaEntrega) {
         this.cliente = cliente;
         this.taxaEntrega = taxaEntrega;
-        this.estado = "Pendente";
     }
 
     public void adicionarItem (Item item) {
@@ -58,15 +59,19 @@ public class Pedido {
         return cuponsDescontoEntrega;
     }
 
+    public EstadoPedido getEstado () {
+        return this.estado;
+    }
+
     public void setCuponsDescontoEntrega(CupomDescontoEntrega cupom) {
         this.cuponsDescontoEntrega.add(cupom);
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
 
     public String toString() {
-        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + estado + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
+        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + estado.getClass() + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
     }
 }

@@ -3,21 +3,20 @@ package estadosPedido;
 import abstractions.EstadoPedido;
 import models.Pedido;
 
-public class EstadoAberto extends EstadoPedido {
-
-    public EstadoAberto(Pedido pedido) {
+public class EstadoEmPreparo extends EstadoPedido {
+    public EstadoEmPreparo(Pedido pedido) {
         super(pedido);
-        System.out.println("Pedido está em Aberto");
+        System.out.println("Pedido está em preparo");
     }
 
     @Override
     public void preparar() {
-        pedido.setEstado(new EstadoEmPreparo(pedido));
+        throw new RuntimeException("Pedido já está em preparo");
     }
 
     @Override
     public void finalizarPreparo() {
-        throw new RuntimeException("Pedido ainda não está em preparo");
+        pedido.setEstado(new EstadoPronto(pedido));
     }
 
     @Override

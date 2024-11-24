@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
-    Map<String, Double> bairros = new HashMap<>();
+    private Map<String, Double> bairros = new HashMap<>();
 
     public FormaDescontoTaxaPorBairro() {
         bairros.put("Centro", 0.2);

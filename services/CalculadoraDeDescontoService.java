@@ -19,7 +19,7 @@ public class CalculadoraDeDescontoService {
         metodosDeDesconto.add(new FormaDescontoValorPedido());
     }
 
-    public void calcularDesconto(Pedido pedido) {
+    public void addFormaDesconto(Pedido pedido) {
         for (IFormaDescontoTaxaEntrega formas : metodosDeDesconto) {
             formas.calcularDesconto(pedido);
         }

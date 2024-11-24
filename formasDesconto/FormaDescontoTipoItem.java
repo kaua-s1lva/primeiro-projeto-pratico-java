@@ -8,9 +8,8 @@ import models.Pedido;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
-    Map<String,Double> descontosPorTipoItem = new HashMap<>();
+    private Map<String,Double> descontosPorTipoItem = new HashMap<>();
 
     public FormaDescontoTipoItem() {
         descontosPorTipoItem.put("Alimentação", 0.05);
