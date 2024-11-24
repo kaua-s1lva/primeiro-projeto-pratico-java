@@ -22,7 +22,7 @@ public class Pedido {
     }
 
     public double getValorPedido() {
-        double valorTotal = taxaEntrega;
+        double valorTotal = getTaxaEntrega();
         for (int i=0; i<itens.size(); i++) {
             valorTotal += itens.get(i).getValorTotal();
         }
@@ -38,7 +38,7 @@ public class Pedido {
     }
 
     public double getTaxaEntrega() {
-        return taxaEntrega;
+        return taxaEntrega - getDescontoConcedido();
     }
 
     public void aplicarDesconto(CupomDescontoEntrega cupom) {
