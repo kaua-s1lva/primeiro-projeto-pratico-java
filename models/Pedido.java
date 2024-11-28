@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import abstractions.EstadoPedido;
+import interfaces.IMetodoPagamento;
 
 public class Pedido {
     private double taxaEntrega;
@@ -11,6 +12,7 @@ public class Pedido {
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
     private EstadoPedido estado;
+    private IMetodoPagamento metodoPagamento;
 
     public Pedido (Date data, Cliente cliente, double taxaEntrega) {
         this.cliente = cliente;
@@ -22,7 +24,7 @@ public class Pedido {
     }
 
     public double getValorPedido() {
-        double valorTotal = getTaxaEntrega();
+        double valorTotal = getTaxaEntregaComDesconto();
         for (int i=0; i<itens.size(); i++) {
             valorTotal += itens.get(i).getValorTotal();
         }
@@ -38,7 +40,11 @@ public class Pedido {
     }
 
     public double getTaxaEntrega() {
-        return taxaEntrega - getDescontoConcedido();
+        return taxaEntrega;
+    }
+
+    public double getTaxaEntregaComDesconto() {
+        return taxaEntrega - this.getDescontoConcedido();
     }
 
     public void aplicarDesconto(CupomDescontoEntrega cupom) {
@@ -48,7 +54,6 @@ public class Pedido {
     public double getDescontoConcedido() {
         double descontoTotal = 0;
         for (CupomDescontoEntrega cupom : cuponsDescontoEntrega) {
-            System.out.println("nome: " + cupom.getNomeMetodo() + " - " + cupom.getValorDesconto());
             descontoTotal += cupom.getValorDesconto();
         }
         if (descontoTotal > this.getTaxaEntrega()) return this.getTaxaEntrega();
@@ -71,7 +76,15 @@ public class Pedido {
         this.estado = estado;
     }
 
+    public void setPagamentoRealizado(IMetodoPagamento metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
+    }
+
+    public IMetodoPagamento getPagamentoRealizado() {
+        return metodoPagamento;
+    }
+
     public String toString() {
-        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + estado.getClass() + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido();
+        return "\nTaxa de entrega: " + taxaEntrega + "\nStatus do pedido: " + estado.getClass() + "\nNome do cliente: " + cliente.getNome() + "\nDesconto fornecido: " + this.getDescontoConcedido() + "\nValor total do pedido: " + this.getValorPedido() + "\nPagamento foi realizado? " + metodoPagamento;
     }
 }

@@ -1,10 +1,13 @@
 import java.util.Date;
 
+import interfaces.IMetodoPagamento;
+import metodosPagamento.CartaoDebito;
 import models.Cliente;
 import models.Item;
 import models.Pedido;
 import services.CalculadoraDeDescontoService;
 import services.ControladorDeEstadosPedidoService;
+import services.SistemaPagamentoService;
 
 public class Main {
     public static void main (String[] args) {
@@ -29,6 +32,12 @@ public class Main {
             System.out.println("Falha: " + e.getMessage());
         }
 
+        SistemaPagamentoService sistemaPagamento = new SistemaPagamentoService();
+        
+        //IMetodoPagamento boleto = new Boleto();
+        IMetodoPagamento cartaoDebito = new CartaoDebito("252161616", "12/24", 243, pedido.getCliente().getNome());
+        
+        sistemaPagamento.realizarPagamento(pedido, cartaoDebito, pedido.getValorPedido()); 
         System.out.println(pedido.toString());
     }
 }
