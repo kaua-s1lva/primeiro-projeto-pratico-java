@@ -6,6 +6,7 @@ import models.Cliente;
 import models.Item;
 import models.Pedido;
 import services.CalculadoraDeDescontoService;
+import services.CalculadoraDeDescontoValorPedidoService;
 import services.ControladorDeEstadosPedidoService;
 import services.SistemaPagamentoService;
 
@@ -38,6 +39,12 @@ public class Main {
         IMetodoPagamento cartaoDebito = new CartaoDebito("252161616", "12/24", 243, pedido.getCliente().getNome());
         
         sistemaPagamento.realizarPagamento(pedido, cartaoDebito, pedido.getValorPedido()); 
+
+        CalculadoraDeDescontoValorPedidoService calculadoraValorPedido = new CalculadoraDeDescontoValorPedidoService();
+
+        calculadoraValorPedido.aplicarDescontoCodCupom(pedido, "DESC10");
+        calculadoraValorPedido.aplicarDescontoTipoItem(pedido);
+        calculadoraValorPedido.aplicarDescontoTipoCliente(pedido);
         System.out.println(pedido.toString());
     }
 }
