@@ -45,6 +45,7 @@ public class Cliente {
         this.fidelidade = fidelidade;
     }
 
+    @Override
     public String toString() {
         return "nome: " + nome + "\ntipo: " + tipo + "\nfidelidade: " + fidelidade + "\nlogradouro: " + logradouro + "\nbairro: " + bairro + "\ncidade: " + cidade;
     }

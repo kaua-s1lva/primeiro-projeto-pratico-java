@@ -97,6 +97,7 @@ public class Pedido {
         return metodoPagamento;
     }
 
+    @Override
     public String toString() {
         for (CupomDescontoValorPedido cupom : this.cuponsDescontoValorPedido) {
             System.out.println("Valor do desconto no valor do pedido: " + cupom);

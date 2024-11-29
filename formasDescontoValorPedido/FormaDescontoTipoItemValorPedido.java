@@ -18,6 +18,7 @@ public class FormaDescontoTipoItemValorPedido implements IFormaDescontoValorPedi
         descontos.put("Lazer", 0.15);
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         double valorDesconto = 0;
         if (seAplica(pedido)) {
@@ -30,6 +31,7 @@ public class FormaDescontoTipoItemValorPedido implements IFormaDescontoValorPedi
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         for (CupomDescontoValorPedido cupom : pedido.getCuponsDescontoValorPedido()) {
             if (cupom.getNomeMetodo().equals("Desconto por Cliente") || 

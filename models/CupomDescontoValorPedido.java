@@ -17,6 +17,7 @@ public class CupomDescontoValorPedido {
         return valorDesconto;
     }
 
+    @Override
     public String toString() {
         return "\nNome do método: " + nomeMetodo + "\nValor do desconto: " + valorDesconto;
     }

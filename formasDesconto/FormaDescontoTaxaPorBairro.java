@@ -17,6 +17,7 @@ public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
         bairros.put("Cidade Maravilhosa", 0.15);
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
             pedido.aplicarDesconto(new CupomDescontoEntrega
@@ -24,6 +25,7 @@ public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         return bairros.containsKey(pedido.getCliente().getBairro());
     }

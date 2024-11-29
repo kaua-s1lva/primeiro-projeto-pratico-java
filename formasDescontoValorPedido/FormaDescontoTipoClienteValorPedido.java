@@ -17,6 +17,7 @@ public class FormaDescontoTipoClienteValorPedido implements IFormaDescontoValorP
         clientes.put("Bronze", 0.1);
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
             double valorDesconto = clientes.get(pedido.getCliente().getTipo()) * pedido.getValorPedido();
@@ -24,6 +25,7 @@ public class FormaDescontoTipoClienteValorPedido implements IFormaDescontoValorP
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         for(CupomDescontoValorPedido cupom : pedido.getCuponsDescontoValorPedido()) {
             if (cupom.getNomeMetodo().equals("Desconto por Item")) return false;

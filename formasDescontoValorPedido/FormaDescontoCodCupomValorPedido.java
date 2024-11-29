@@ -19,6 +19,7 @@ public class FormaDescontoCodCupomValorPedido implements IFormaDescontoValorPedi
         this.cupomCliente = cupomCliente;
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
             double valorDesconto = cupons.get(cupomCliente) * pedido.getValorPedido();
@@ -26,6 +27,7 @@ public class FormaDescontoCodCupomValorPedido implements IFormaDescontoValorPedi
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         for(CupomDescontoValorPedido cupom : pedido.getCuponsDescontoValorPedido()) {
             if (cupom.getNomeMetodo().equals("Desconto por Item")) {
