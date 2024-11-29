@@ -1,11 +1,14 @@
 import java.util.Date;
 
+import formasDescontoValorPedido.FormaDescontoCodCupomValorPedido;
+import formasDescontoValorPedido.FormaDescontoTipoClienteValorPedido;
+import formasDescontoValorPedido.FormaDescontoTipoItemValorPedido;
 import interfaces.IMetodoPagamento;
 import metodosPagamento.CartaoDebito;
 import models.Cliente;
 import models.Item;
 import models.Pedido;
-import services.CalculadoraDeDescontoService;
+import services.CalculadoraDeDescontoTaxaEntregaService;
 import services.CalculadoraDeDescontoValorPedidoService;
 import services.ControladorDeEstadosPedidoService;
 import services.SistemaPagamentoService;
@@ -19,7 +22,7 @@ public class Main {
         Pedido pedido = new Pedido(new Date(), cliente, 10.0);
         pedido.adicionarItem(item);
 
-        CalculadoraDeDescontoService calculadora = new CalculadoraDeDescontoService();
+        CalculadoraDeDescontoTaxaEntregaService calculadora = new CalculadoraDeDescontoTaxaEntregaService();
 
         calculadora.addFormaDesconto(pedido);
 
@@ -42,9 +45,13 @@ public class Main {
 
         CalculadoraDeDescontoValorPedidoService calculadoraValorPedido = new CalculadoraDeDescontoValorPedidoService();
 
-        calculadoraValorPedido.aplicarDescontoCodCupom(pedido, "DESC10");
-        calculadoraValorPedido.aplicarDescontoTipoItem(pedido);
-        calculadoraValorPedido.aplicarDescontoTipoCliente(pedido);
+        try{
+            calculadoraValorPedido.aplicarDesconto(pedido, new FormaDescontoCodCupomValorPedido("DESC10"));
+            calculadoraValorPedido.aplicarDesconto(pedido, new FormaDescontoTipoItemValorPedido());
+            calculadoraValorPedido.aplicarDesconto(pedido, new FormaDescontoTipoClienteValorPedido());
+        } catch (RuntimeException e) {
+            System.out.println("Falha: " + e);
+        }
         System.out.println(pedido.toString());
     }
 }

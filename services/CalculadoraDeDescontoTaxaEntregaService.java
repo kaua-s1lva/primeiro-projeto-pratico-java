@@ -9,10 +9,10 @@ import models.Pedido;
 
 import java.util.ArrayList;
 
-public class CalculadoraDeDescontoService {
+public class CalculadoraDeDescontoTaxaEntregaService {
     private ArrayList<IFormaDescontoTaxaEntrega> metodosDeDesconto = new ArrayList<>();
 
-    public CalculadoraDeDescontoService() {
+    public CalculadoraDeDescontoTaxaEntregaService() {
         metodosDeDesconto.add(new FormaDescontoTaxaPorBairro());
         metodosDeDesconto.add(new FormaDescontoTaxaPorTipoCliente());
         metodosDeDesconto.add(new FormaDescontoTipoItem());

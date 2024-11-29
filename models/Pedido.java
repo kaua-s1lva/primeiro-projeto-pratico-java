@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import abstractions.EstadoPedido;
-import interfaces.IFormaDescontoValorPedido;
 import interfaces.IMetodoPagamento;
 
 public class Pedido {

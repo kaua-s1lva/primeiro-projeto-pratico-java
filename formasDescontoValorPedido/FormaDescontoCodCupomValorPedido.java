@@ -1,4 +1,4 @@
-package formasDesconto;
+package formasDescontoValorPedido;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,10 @@ public class FormaDescontoCodCupomValorPedido implements IFormaDescontoValorPedi
 
     public boolean seAplica(Pedido pedido) {
         for(CupomDescontoValorPedido cupom : pedido.getCuponsDescontoValorPedido()) {
-            if (cupom.getNomeMetodo().equals("Desconto por Item")) return false;
+            if (cupom.getNomeMetodo().equals("Desconto por Item")) {
+                throw new RuntimeException("Desconto por Código de Cupom não pode ser aplicado pois desconto por item já foi aplicado");
+                //return false;
+            }
         }
 
         return cupons.containsKey(cupomCliente);

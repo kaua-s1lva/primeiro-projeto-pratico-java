@@ -1,4 +1,4 @@
-package formasDesconto;
+package formasDescontoValorPedido;
 
 import interfaces.IFormaDescontoValorPedido;
 import models.CupomDescontoValorPedido;
