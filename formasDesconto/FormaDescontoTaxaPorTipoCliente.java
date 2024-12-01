@@ -17,6 +17,7 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
         clientes.put("Bronze", 0.1);
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         if (seAplica(pedido)) {
             double valorDesconto = clientes.get(pedido.getCliente().getTipo()) * pedido.getTaxaEntrega();
@@ -24,6 +25,7 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         return clientes.containsKey(pedido.getCliente().getTipo());
     }

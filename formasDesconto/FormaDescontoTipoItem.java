@@ -18,6 +18,7 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
         descontosPorTipoItem.put("Lazer", 0.15);
     }
 
+    @Override
     public void calcularDesconto(Pedido pedido) {
         double valorDesconto = 0;
         if (seAplica(pedido)) {
@@ -30,6 +31,7 @@ public class FormaDescontoTipoItem implements IFormaDescontoTaxaEntrega {
         }
     }
 
+    @Override
     public boolean seAplica(Pedido pedido) {
         for (Item item : pedido.getItens()) {
             if (descontosPorTipoItem.containsKey(item.getTipo())) {

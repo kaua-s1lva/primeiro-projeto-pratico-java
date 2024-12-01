@@ -1,10 +1,10 @@
 package models;
 
-public class CupomDescontoEntrega {
+public class CupomDescontoValorPedido {
     private String nomeMetodo;
     private double valorDesconto;
 
-    public CupomDescontoEntrega(String nomeMetodo, double valorDesconto) {
+    public CupomDescontoValorPedido(String nomeMetodo, double valorDesconto) {
         this.nomeMetodo = nomeMetodo;
         this.valorDesconto = valorDesconto;
     }

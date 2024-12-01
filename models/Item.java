@@ -21,6 +21,7 @@ public class Item {
         return tipo;
     }
 
+    @Override
     public String toString () {
         return "nome: " + nome + "\nquantidade: " + quantidade + "\nvalor unitário: " + valorUnitario + "tipo: " + tipo;
     }
