@@ -18,9 +18,11 @@ public class Main {
         Cliente cliente = new Cliente("Kaua", "Ouro", 3, "rua vitorio albani", "Cidade Maravilhosa", "alegre");
 
         Item item = new Item("maça", 3, 2.5, "Alimentação");
+        Item item2 = new Item("banana", 1, 5, "Educação");
 
         Pedido pedido = new Pedido(new Date(), cliente, 10.0);
         pedido.adicionarItem(item);
+        pedido.adicionarItem(item2);
 
         CalculadoraDeDescontoTaxaEntregaService calculadora = new CalculadoraDeDescontoTaxaEntregaService();
 

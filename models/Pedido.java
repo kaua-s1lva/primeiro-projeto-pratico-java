@@ -36,6 +36,10 @@ public class Pedido {
         return valorTotal;
     }
 
+    public double getValorTotalPedido() {
+        return getValorPedido() - getDescontoConcedidoValorPedido();
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -49,7 +53,7 @@ public class Pedido {
     }
 
     public double getTaxaEntregaComDesconto() {
-        return taxaEntrega - this.getDescontoConcedido();
+        return taxaEntrega - this.getDescontoConcedidoTaxaEntrega();
     }
 
     public void aplicarDesconto(CupomDescontoEntrega cupom) {
@@ -60,12 +64,20 @@ public class Pedido {
         cuponsDescontoValorPedido.add(cupom);
     }
 
-    public double getDescontoConcedido() {
+    public double getDescontoConcedidoTaxaEntrega() {
         double descontoTotal = 0;
         for (CupomDescontoEntrega cupom : cuponsDescontoEntrega) {
             descontoTotal += cupom.getValorDesconto();
         }
         if (descontoTotal > this.getTaxaEntrega()) return this.getTaxaEntrega();
+        return descontoTotal;
+    }
+
+    public double getDescontoConcedidoValorPedido() {
+        double descontoTotal = 0;
+        for (CupomDescontoValorPedido cupom : cuponsDescontoValorPedido) {
+            descontoTotal += cupom.getValorDesconto();
+        }
         return descontoTotal;
     }
 
@@ -99,14 +111,12 @@ public class Pedido {
 
     @Override
     public String toString() {
-        for (CupomDescontoValorPedido cupom : this.cuponsDescontoValorPedido) {
-            System.out.println("Valor do desconto no valor do pedido: " + cupom);
-        }
         return "\nTaxa de entrega: " + taxaEntrega + 
         "\nStatus do pedido: " + estado.getClass() + 
         "\nNome do cliente: " + cliente.getNome() + 
-        "\nDesconto fornecido: " + this.getDescontoConcedido() + 
-        "\nValor total do pedido: " + this.getValorPedido() + 
+        "\nDesconto concedido para taxa de entrega: " + this.getDescontoConcedidoTaxaEntrega() + 
+        "\nDesconto concedido para valor do pedido: " + this.getDescontoConcedidoValorPedido() + 
+        "\nValor total do pedido: " + this.getValorTotalPedido() + 
         "\nPagamento foi realizado? " + metodoPagamento + 
         "\nValor Pedido desconto: " + this.cuponsDescontoValorPedido;
     }
